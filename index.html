@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Libro de Partituras</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="manifest" href="/manifest.json">
+<link rel="stylesheet" href="css/global.css">
+
+<script src="https://cdn.jsdelivr.net/npm/opensheetmusicdisplay@1.8.6/build/opensheetmusicdisplay.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/tone@14.8.49/build/Tone.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tonejs/midi@2.0.27/build/Midi.js"></script>
+
+<!--  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>  creo que No necesaria -->
+
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/svg2pdf.js@2.0.0/dist/svg2pdf.umd.min.js"></script>
+</head>
+
+<body>
+
+<!-- ================== PESTAÑAS ==================  <script src="js/musicxml-latin.js"></script> -->
+<div class="tabs">
+  <button class="tab active" data-tab="indice">Índice</button>
+  <button class="tab" data-tab="selección">Selección de cantos</button>
+  <button class="tab" data-tab="partitura">Partitura</button>
+  <button class="tab" data-tab="ajustes">Ajustes</button>
+</div>
+
+<!-- ================== TOOLBARS ================== -->
+
+<!-- Índice -->
+<div id="toolbar-indice" class="toolbar active">
+  <button id="btnClearAll">Nuevo (desmarcar todos)</button>  
+
+  <div id="filtro-categorias" class="dropdown">
+    <button id="btnFiltro">Mostrar: Todo ▾</button>
+  
+    <div id="menuFiltro" class="dropdown-content">
+      <div data-filter="todo">Todo</div>
+      <div data-filter="ordinario">Tiempo Ordinario</div>
+      <div data-filter="adviento">Adviento</div>
+      <div data-filter="navidad">Navidad</div>
+      <div data-filter="cuaresma">Cuaresma</div>
+      <div data-filter="pascua">Pascua</div>
+      <div data-filter="LH">Liturgia de las horas</div>
+    </div>
+  </div>
+  <input type="text" id="buscador" placeholder="Buscar canto...">
+
+</div>
+
+<!-- Partitura -->
+<div id="toolbar-partitura" class="toolbar">
+  <label><input type="checkbox" id="chkSelect"> Seleccionar</label>
+
+  <button id="btnZoomOut">−</button>
+  <span id="zoomLabelMain" style="align-self:center; font-weight:400;">Ampliación: 100%</span>
+  <button id="btnZoomIn">+</button>
+
+  
+  <span class="separator"></span>
+  <span id="tonoLabel" style="align-self:center; font-weight:400;">Tono: 0</span>
+  <button id="btnDown" style="margin-left: 7px;">−½</button> 
+  <button id="btnUp">+½</button>
+  <button id="btnReset">Original</button>
+  <button id="btnPlay" style="margin-left: 10px;">▶ Play</button>
+
+</div>
+
+<!-- selección de cantos -->
+<div id="toolbar-selección" class="toolbar">
+  <button id="btnClearAllSeleccion">Nuevo (desmarcar todos)</button>
+  <button id="btnZoomSelOut">−</button>
+  <span id="zoomLabel" style="align-self:center; font-weight:400;">Ampliación: 100%</span>
+  <button id="btnZoomSelIn">+</button>
+
+  <!-- NUEVO -->
+  <span class="separator"></span>
+
+  <span class="acciones-seleccion">
+    <button id="btnUpSel">🔼</button>
+    <button id="btnDownSel">🔽</button>
+    <button id="btnRemoveSel">✖</button>
+  </span>
+
+  <span class="separator"></span>
+  <button id="btnExportPDF">Exportar PDF</button></div>
+
+<!-- Ajustes -->
+<div id="toolbar-ajustes" class="toolbar">
+  <button id="btnAplicar">Aplicar</button>
+</div>
+
+<!-- ================== CONTENIDOS ================== -->
+
+<!-- ÍNDICE -->
+<div id="indice" class="tab-content active">
+  <h2>Índice de partituras</h2>
+  <ul id="lista"></ul>
+</div>
+
+<!-- PARTITURA -->
+<div id="partitura" class="tab-content">
+  <div id="score">
+    <p id="emptyMessage" style="text-align:center; color:#777;">
+      No hay partitura cargada
+    </p>
+  </div>  
+</div>
+
+<!-- lista selección -->
+<div id="selección" class="tab-content">
+  <h3>Partituras seleccionadas</h3>
+  <ul id="selected"></ul>
+  <div id="scoresContainer"></div>
+</div>
+
+<!-- AJUSTES -->
+<div id="ajustes" class="tab-content">
+  <div id="tipoacorde" style="display:flex; align-items:center; gap:1rem;">
+    <span>Elegir tipo de cifrado:</span>
+    <label><input type="radio" name="acordelatin" value=true checked>latino</label>
+    <label><input type="radio" name="acordelatin" value=false>americano</label>
+  </div>
+</div>
+
+
+<script type="module" src="js/main.js"></script>
+
+</body>
+</html>
