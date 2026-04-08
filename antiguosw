@@ -1,0 +1,62 @@
+const CACHE_NAME = "partitura-pwa-v8";
+
+const STATIC_FILES = [  // Archivos estáticos de la PWA
+  "/",
+  "/index.html",
+  "/partitura.html",
+  "/favicon.ico",
+  "/manifest.json",
+  "/icons/icon-192.png",
+  "/icons/icon-512.png",
+  "https://cdn.jsdelivr.net/npm/opensheetmusicdisplay@1.8.6/build/opensheetmusicdisplay.min.js",
+  "/partituras.json"
+];
+
+// Función para generar lista de archivos de partituras desde JSON
+async function getScoreFiles() {
+  const res = await fetch("/partituras.json");
+  const partituras = await res.json();
+  const files = [];
+
+  partituras.forEach(p => {
+    const slug = p.slug;
+    files.push(`/scores/${slug}.musicxml`);
+    // Semitonos positivos
+    for(let i=1; i<=p.maxUp; i++) files.push(`/scores/${slug}/${i}.musicxml`);
+    // Semitonos negativos
+    for(let i=1; i<=p.maxDown; i++) files.push(`/scores/${slug}/-${i}.musicxml`);
+  });
+
+  return files;
+}
+
+// Instalación del SW
+self.addEventListener("install", event => {
+  console.log("[SW] Instalando y cacheando archivos...");
+  event.waitUntil(
+    (async () => {
+      const cache = await caches.open(CACHE_NAME);
+      const scoreFiles = await getScoreFiles();
+      await cache.addAll([...STATIC_FILES, ...scoreFiles]);
+    })()
+  );
+  self.skipWaiting();
+});
+
+// Activación del SW y limpieza de caches antiguos
+self.addEventListener("activate", event => {
+  console.log("[SW] Activando SW y eliminando caches antiguos...");
+  event.waitUntil(
+    caches.keys().then(keys =>
+      Promise.all(keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key)))
+    )
+  );
+  self.clients.claim();
+});
+
+// Interceptar solicitudes
+self.addEventListener("fetch", event => {
+  event.respondWith(
+    caches.match(event.request).then(resp => resp || fetch(event.request))
+  );
+});

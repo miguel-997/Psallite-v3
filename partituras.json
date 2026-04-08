@@ -1,0 +1,83 @@
+[
+    {
+      "name": "Himno virgen de Fátima",
+      "slug": "fatima",
+      "categoria": "pascua",
+      "momento": "salida",
+      "maxUp": 3,
+      "maxDown": 5
+    },
+    {
+      "name": "Tomad virgen pura",
+      "slug": "virgenpura",
+      "categoria": "ordinario",
+      "momento": "salida",
+      "maxUp": 3,
+      "maxDown": 5
+    },
+    {
+      "name": "Adeste fideles",
+      "slug": "adestefideles",
+      "categoria": "adviento",
+      "momento": "entrada",
+      "maxUp": 0,
+      "maxDown": 0
+    },
+    {
+      "name": "Saludo inicial LH",
+      "slug": "saludoLH",
+      "categoria": "LH",
+      "momento": ".",
+      "maxUp": 0,
+      "maxDown": 0
+    },
+      {
+      "name": "Cristo, alegría del mundo",
+      "slug": "alegriamundo",
+      "categoria": "pascua",
+      "momento": "himnoLH",
+      "maxUp": 0,
+      "maxDown": 0
+    },
+      {
+      "name": "Alrededor de tu mesa (Palazón)",
+      "slug": "alrededorpalazon",
+      "categoria": "ordinario",
+      "momento": "entrada",
+      "maxUp": 0,
+      "maxDown": 0
+    },
+      {
+      "name": "Antes de ser llevado a la muerte",
+      "slug": "antesdeser",
+      "categoria": "cuaresma",
+      "momento": "comunión",
+      "maxUp": 0,
+      "maxDown": 0
+    },
+      {
+      "name": "Cordero de Dios (J. Berthier)",
+      "slug": "corderoberthier",
+      "categoria": "misa",
+      "momento": "cordero",
+      "maxUp": 0,
+      "maxDown": 0
+    },
+      {
+      "name": "Señor ten piedad - sínodo (Palazón)",
+      "slug": "kyriesinodo",
+      "categoria": "misa",
+      "momento": "kyrie",
+      "maxUp": 0,
+      "maxDown": 0
+    },
+      {
+      "name": "Nueva aurora",
+      "slug": "nuevaaurora",
+      "categoria": "adviento",
+      "momento": "comunión",
+      "maxUp": 0,
+      "maxDown": 0
+    }
+  ]
+  
